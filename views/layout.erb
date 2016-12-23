@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>qLog It!</title>
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- local JS and CSS -->
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row page-heading">
+			<div class="site-title col-sm-4 col-xs-6">
+				<p>Qlog It!</p>
+			</div>
+			<div class="search-bar col-sm-4 col-xs-6">
+				
+			</div>
+			<div class="user-menu col-sm-4 col-xs-6">
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @qser.display_name %><span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li><a href="#">My profile</a></li>
+						<li><a href="#">Create a new qlog</a></li>
+						<li><a href="#">Log out</a></li>
+					</ul>
+				</div>	
+			</div>
+			<div class="login-buttons col-sm-4 col-xs-6">
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#login-modal">Log In</button>
+			</div>
+		</div>	<!-- end of page-heading -->
+	
+		<%= yield %>
+
+		<div id="login-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Log in to your account</h4>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="/login">
+							<label for="username">Login ID</label>
+							<input type="text" name="username"><br>
+							<label for="password">Password</label>
+							<input type="password" name="password"><br>
+							<button type="submit">Log In</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>	
+		</div>	<!-- end of login-modal -->
+		<div id="signup-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sign up for a new account</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<label for="screenname">On-screen display name</label>
+							<input type="text" name="screenname"><br>
+							<label for="username">Login ID name</label>
+							<input type="text" name="username">
+							<input type="checkbox" name="emailname"> Use eMail address<br>
+							<label for="email">eMail address</label>
+							<input type="email" name="email"><br>
+							<label for="passsword">Password</label>
+							<input type="password" name="password"><br>
+							<label for="confirm-password">Confirm password</label>
+							<input type="password" name="confirm-password"><br>
+							<button type="submit">Sign Up</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>					
+				</div>
+			</div>
+		</div>	<!-- end of singup-modal -->
+	</div>	<!-- end of container -->
+</body>
+</html>
