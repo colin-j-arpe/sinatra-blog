@@ -1,5 +1,13 @@
-@import 'globals'
+@import 'globals';
 
 body	{
 	background-color: $main-lt;
+}
+
+.page-heading	{
+	position: fixed;
+	.site-title	{
+		font-size: 36px;
+		color: $prim-md;
+	}
 }

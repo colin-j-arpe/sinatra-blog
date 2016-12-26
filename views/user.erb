@@ -1,0 +1,10 @@
+<h2>My profile:</h2>
+<p><h3>On-screen name: </h3><%= @user.display_name %></p>
+<p><h3>Log-in ID: </h3><%= @user.login_name %></p>
+<p><h3>eMail address: </h3><%= @user.email %></p>
+
+<h2>My posts:</h2>
+<% @posts.each do |post| %>
+	<a href="/posts/<%= post.id %>"><h4><%= post.title %></h4></a>
+	<p><%= post.content %></p>
+<% end %>

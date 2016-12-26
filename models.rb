@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	has_many	:comments
 	after_initialize :default
 	def default
-		self.login_name	= self.email if self.login_name.nil?
+		self.login_name	||= self.email
 		self.admin = false if self.admin.nil?
 	end
 end

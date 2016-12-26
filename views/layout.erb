@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>qLog It!</title>
+	<title>The SinatLog</title>
 	<!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!-- Bootstrap CSS -->
@@ -16,26 +16,31 @@
 	<div class="container">
 		<div class="row page-heading">
 			<div class="site-title col-sm-4 col-xs-6">
-				<p>Qlog It!</p>
+				<p>The SinatLog</p>
 			</div>
 			<div class="search-bar col-sm-4 col-xs-6">
 				
 			</div>
-			<div class="user-menu col-sm-4 col-xs-6">
-				<div class="dropdown">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @qser.display_name %><span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li><a href="#">My profile</a></li>
-						<li><a href="#">Create a new qlog</a></li>
-						<li><a href="#">Log out</a></li>
-					</ul>
-				</div>	
-			</div>
-			<div class="login-buttons col-sm-4 col-xs-6">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#login-modal">Log In</button>
-			</div>
+			<% if @user != nil %>
+				<div class="user-menu col-sm-4 col-xs-6">
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @user.display_name %><span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">My profile</a></li>
+							<li><a data-toggle="modal" data-target="#new-post-modal">New post</a></li>
+							<li><a href="/logout">Log out</a></li>
+						</ul>
+					</div>	
+				</div>
+			<% else %>
+				<div class="login-buttons col-sm-4 col-xs-6">
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#login-modal">Log In</button>
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signup-modal">Sign Up</button>
+				</div>
+			<% end %>
 		</div>	<!-- end of page-heading -->
 	
+		<%= flash[:alert] if flash[:alert] %>
 		<%= yield %>
 
 		<div id="login-modal" class="modal fade" role="dialog">
@@ -66,25 +71,46 @@
 						<h4 class="modal-title">Sign up for a new account</h4>
 					</div>
 					<div class="modal-body">
-						<form>
-							<label for="screenname">On-screen display name</label>
-							<input type="text" name="screenname"><br>
-							<label for="username">Login ID name</label>
-							<input type="text" name="username">
+						<form method="POST" action="/users/create">
+							<label for="display_name">On-screen display name</label>
+							<input type="text" name="display_name"><br>
+							<label for="login_name">Login ID name</label>
+							<input type="text" name="login_name">
 							<input type="checkbox" name="emailname"> Use eMail address<br>
 							<label for="email">eMail address</label>
 							<input type="email" name="email"><br>
 							<label for="passsword">Password</label>
 							<input type="password" name="password"><br>
-							<label for="confirm-password">Confirm password</label>
+<!-- 							<label for="confirm-password">Confirm password</label>
 							<input type="password" name="confirm-password"><br>
-							<button type="submit">Sign Up</button>
+ -->							<button type="submit">Sign Up</button>
 						</form>
 					</div>
 					<div class="modal-footer"></div>					
 				</div>
 			</div>
 		</div>	<!-- end of singup-modal -->
+		<div id="new-post-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Enter a new post</h4>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="/post/create">
+							<label for="title">Post title</label>
+							<input type="text" name="title"><br>
+							<label for="embed">Embedded media link (optional)</label>
+							<input type="text" name="embed"><br>
+							<textarea name="content" placeholder="Type your post here"></textarea>
+							<button type="submit">Post it</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>	<!-- end of new-post-modal -->
 	</div>	<!-- end of container -->
 </body>
 </html>

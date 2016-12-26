@@ -1,4 +1,12 @@
 /* colour palette */
 /* fonts */
+body {
+  background-color: #ffcc99; }
+
+.page-heading {
+  position: fixed; }
+  .page-heading .site-title {
+    font-size: 36px;
+    color: #e40492; }
 
 /*# sourceMappingURL=styles.css.map */
