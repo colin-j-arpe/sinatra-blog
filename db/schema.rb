@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223192857) do
+ActiveRecord::Schema.define(version: 20161228070049) do
 
   create_table "comments", force: :cascade do |t|
     t.string  "content"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161223192857) do
     t.string  "login_name"
     t.string  "password"
     t.boolean "admin"
+    t.string  "photo_url"
   end
 
 end

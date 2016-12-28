@@ -40,8 +40,8 @@ post '/login' do
 end
 
 get '/users/:id' do
-	current_user
-puts @user
+	@user = User.find(params[:id])
+	@this_user = true if @user.id == session[:user_id]
 	@posts = Post.where(user_id: @user.id).reverse
 	erb :user
 end
@@ -91,7 +91,7 @@ post '/users/password' do
 		flash[:alert] = "New passwords do not match"
 		redirect "users/#{@user.id}#change-password-modal"
 	else
-		@user.password = params[:new_password_confirm]
+		@user.password = params[:new_password]
 		@user.save
 	end
 	redirect "users/#{@user.id}"

@@ -10,9 +10,21 @@
     color: #6c0245;
     padding: 0;
     margin: 0; }
+  .post-container .poster-photo-box {
+    position: absolute;
+    right: 24px;
+    top: 12px; }
+    .post-container .poster-photo-box .poster-photo {
+      width: 60px;
+      height: 60px; }
 
 .post-contents {
   display: none; }
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  float: right; }
 
 body {
   background-color: #ffcc99; }
