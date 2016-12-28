@@ -1,0 +1,36 @@
+<% if @posts.length > 10 %>
+	<% list = 10 %>
+<% else  %>
+	<% list = @posts.length %>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+		<h2>Recent posts:</h2>
+	</div>
+</div>
+
+<% (0...list).each do |i| %>
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+			<div class="post-container">
+				<div class="post-title">
+					<h3><a href="/posts/<%= @posts[i].id %>"><%= @posts[i].title %></a></h3>
+					<div class="post-notes">
+						<p><% if @posts[i].embed %>(media) <% end %><% if Comment.where(post_id: @posts[i].id).length > 0 %> (comments)<% end %></p>
+					</div>
+				</div>
+				<div class="post-contents">
+					<% if @posts[i].embed %>
+						<div class="post-media">
+							<%= @posts[i].embed %>
+						</div>
+					<% end %>
+					<div class="post-text">
+						<p><%= @posts[i].content %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

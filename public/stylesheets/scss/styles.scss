@@ -1,4 +1,5 @@
 @import 'globals';
+@import 'home';
 
 body	{
 	background-color: $main-lt;
@@ -6,8 +7,14 @@ body	{
 
 .page-heading	{
 	position: fixed;
+	width: 100%;
 	.site-title	{
 		font-size: 36px;
 		color: $prim-md;
 	}
+}
+
+#yield-container	{
+	position: relative;
+	top: 60px;
 }

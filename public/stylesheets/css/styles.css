@@ -1,12 +1,31 @@
 /* colour palette */
 /* fonts */
+.post-container {
+  background-color: #f5b5dd;
+  padding: 10px 20px;
+  border: 2px solid #336600;
+  border-radius: 6px;
+  margin-bottom: 20px; }
+  .post-container h3 {
+    color: #6c0245;
+    padding: 0;
+    margin: 0; }
+
+.post-contents {
+  display: none; }
+
 body {
   background-color: #ffcc99; }
 
 .page-heading {
-  position: fixed; }
+  position: fixed;
+  width: 100%; }
   .page-heading .site-title {
     font-size: 36px;
     color: #e40492; }
+
+#yield-container {
+  position: relative;
+  top: 60px; }
 
 /*# sourceMappingURL=styles.css.map */

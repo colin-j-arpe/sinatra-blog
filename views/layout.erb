@@ -9,14 +9,14 @@
 	<!-- Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<!-- local JS and CSS -->
-	<script type="text/javascript" src="js/scripts.js"></script>
-	<link rel="stylesheet" type="text/css" href="stylesheets/css/styles.css">
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/css/styles.css">
 </head>
 <body>
 	<div class="container">
 		<div class="row page-heading">
 			<div class="site-title col-sm-4 col-xs-6">
-				<p>The SinatLog</p>
+				<a href="/home"><h1>The SinatLog</h1></a>
 			</div>
 			<div class="search-bar col-sm-4 col-xs-6">
 				
@@ -24,9 +24,9 @@
 			<% if @user != nil %>
 				<div class="user-menu col-sm-4 col-xs-6">
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @user.display_name %><span class="caret"></span></button>
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @user.display_name %> <span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a href="#">My profile</a></li>
+							<li><a href="/users/<%= @user.id %>">My profile</a></li>
 							<li><a data-toggle="modal" data-target="#new-post-modal">New post</a></li>
 							<li><a href="/logout">Log out</a></li>
 						</ul>
@@ -39,9 +39,11 @@
 				</div>
 			<% end %>
 		</div>	<!-- end of page-heading -->
-	
-		<%= flash[:alert] if flash[:alert] %>
-		<%= yield %>
+
+		<div id="yield-container">
+			<%= flash[:alert] if flash[:alert] %>
+			<%= yield %>
+		</div>		
 
 		<div id="login-modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
