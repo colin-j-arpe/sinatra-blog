@@ -19,7 +19,10 @@
 				<a href="/home"><h1>The SinatLog</h1></a>
 			</div>
 			<div class="search-bar col-sm-4 col-xs-6">
-				
+				<form method="POST" action="/search">
+					<input type="text" name="term">
+					<button type="submit">Search</button>
+				</form>
 			</div>
 			<% if @user != nil %>
 				<div class="user-menu col-sm-4 col-xs-6">
@@ -75,14 +78,15 @@
 					<div class="modal-body">
 						<form method="POST" action="/users/create">
 							<label for="display_name">On-screen display name</label>
-							<input type="text" name="display_name"><br>
+							<input type="text" name="display_name" required><br>
 							<label for="login_name">Login ID name</label>
-							<input type="text" name="login_name">
-							<input type="checkbox" name="emailname"> Use eMail address<br>
+							<input id="login-name-input" type="text" name="login_name">
+							<input id="login-email-checkbox" type="checkbox" name="emailname"> Use eMail address<br>
 							<label for="email">eMail address</label>
-							<input type="email" name="email"><br>
-							<label for="passsword">Password</label>
-							<input type="password" name="password"><br>
+							<input type="email" name="email" required>
+							<input type="checkbox" name="show_email" checked> Display eMail address to other users<br>
+							<label for="password">Password</label>
+							<input type="password" name="password" required><br>
 <!-- 							<label for="confirm-password">Confirm password</label>
 							<input type="password" name="confirm-password"><br>
  -->							<button type="submit">Sign Up</button>

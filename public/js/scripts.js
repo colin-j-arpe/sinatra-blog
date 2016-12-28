@@ -8,5 +8,13 @@ $(document).ready(function () {
 			$(".post-contents").eq(i).slideDown ("slow");
 		});
 	}
+
+	$("#login-email-checkbox").on ("click", function ()	{
+		if ($("#login-email-checkbox").prop("checked"))	{
+			$("#login-name-input").attr("disabled", "true");
+		}	else	{
+			$("#login-name-input").removeAttr("disabled");
+		}
+	});
 });
 

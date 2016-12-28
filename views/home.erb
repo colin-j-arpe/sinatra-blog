@@ -16,7 +16,7 @@
 			<div class="post-container">
 				<div class="post-title">
 					<h3><a href="/posts/<%= @posts[i].id %>"><%= @posts[i].title %></a></h3>
-					<div class="poster-photo-box"><a href="/users/<%= @posts[i].user_id %>"><img class="poster-photo" src="<%= User.find(@posts[i].user_id).photo_url %>"></a></div>
+					<div class="user-photo-box"><a href="/users/<%= @posts[i].user_id %>"><img class="user-photo" src="<%= User.find(@posts[i].user_id).photo_url %>"></a></div>
 					<div class="post-notes">
 						<p>Posted by: <%= User.find(@posts[i].user_id).display_name %> <% if @posts[i].embed %> (media) <% end %><% if Comment.where(post_id: @posts[i].id).length > 0 %> (comments)<% end %></p>
 					</div>

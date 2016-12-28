@@ -40,9 +40,10 @@ post '/login' do
 end
 
 get '/users/:id' do
-	@user = User.find(params[:id])
-	@this_user = true if @user.id == session[:user_id]
-	@posts = Post.where(user_id: @user.id).reverse
+	current_user
+	@view_user = User.find(params[:id])
+	@this_user = true if @user.id == @view_user.id
+	@posts = Post.where(user_id: @view_	user.id).reverse
 	erb :user
 end
 
@@ -53,7 +54,7 @@ post '/users/create' do
 		session[:user_id] = nil
 		redirect "/home"
 	end
-	@user = User.new(display_name: params[:display_name], email: params[:email], password: params[:password], admin: false)
+	@user = User.new(display_name: params[:display_name], email: params[:email], show_email: params[:show_email], password: params[:password], admin: false)
 	if params[:emailname]
 		@user.login_name = params[:email]
 	else
@@ -78,11 +79,13 @@ post '/users/edit' do
 	if params[:photo_url] != ""
 		@user.photo_url = params[:photo_url]
 	end
+	@user.show_email = params[:show_email]
 	@user.save
 	redirect "users/#{@user.id}"
 end
 
 post '/users/password' do
+	flash[:alert] = nil
 	@user = User.find(session[:user_id])
 	if @user.password != params[:old_password]
 		flash[:alert] = "Incorrect current password"
