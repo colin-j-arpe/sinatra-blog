@@ -43,7 +43,7 @@ get '/users/:id' do
 	current_user
 	@view_user = User.find(params[:id])
 	@this_user = true if @user.id == @view_user.id
-	@posts = Post.where(user_id: @view_	user.id).reverse
+	@posts = Post.where(user_id: @view_user.id).reverse
 	erb :user
 end
 
@@ -111,11 +111,15 @@ post '/post/create' do
 	@post = Post.new(user_id: session[:user_id], title: params[:title], content: params[:content])
 	if params[:embed] == ""
 		@post.embed = nil
+	elsif params[:embed][0] != "<"
+		@post.embed = "<img src='"
+		@post.embed += params[:embed]
+		@post.embed += "'>"
 	else
 		@post.embed = params[:embed]
 	end
 	@post.save
-	redirect "/users/#{session[:user_id]}"
+	redirect "/posts/#{@post.id}"
 end
 
 get '/posts/:id/delete' do
@@ -127,6 +131,29 @@ end
 post '/comment/create' do
 	@comment = Comment.create(params)
 	redirect "/posts/#{params[:post_id]}"
+end
+
+post '/search' do
+	session[:term] = params[:term]
+	redirect "/search/results"
+end
+
+get '/search/results' do
+	current_user
+	@term = session[:term]
+	@user_results = User.where("display_name LIKE (?)", "%#{@term}%")
+	@user_results += User.where("email LIKE (?)", "%#{@term}%")
+	@user_results = @user_results.uniq
+	@post_results = Post.where("title LIKE (?)", "%#{@term}%")
+	@post_results += Post.where("content LIKE (?)", "%#{@term}%")
+	@post_results = @post_results.uniq
+	comment_results = Comment.where("content LIKE (?)", "%#{@term}%")
+	posts_that_own_comments = []
+	comment_results.each do |comment|
+		posts_that_own_comments.push(Post.find(comment.post_id))
+	end
+	@posts_plus_comments = (@post_results + posts_that_own_comments).uniq
+	erb :results
 end
 
 get '/logout' do	

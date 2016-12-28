@@ -1,23 +1,5 @@
 /* colour palette */
 /* fonts */
-.post-container {
-  background-color: #f5b5dd;
-  padding: 10px 20px;
-  border: 2px solid #336600;
-  border-radius: 6px;
-  margin-bottom: 20px; }
-  .post-container h3 {
-    color: #6c0245;
-    padding: 0;
-    margin: 0; }
-  .post-container .user-photo-box {
-    position: absolute;
-    right: 24px;
-    top: 12px; }
-    .post-container .user-photo-box .user-photo {
-      width: 60px;
-      height: 60px; }
-
 .post-contents {
   display: none; }
   .post-contents .post-media {
@@ -41,5 +23,23 @@ body {
 #yield-container {
   position: relative;
   top: 60px; }
+
+.unit-container {
+  background-color: #f5b5dd;
+  padding: 10px 20px;
+  border: 2px solid #336600;
+  border-radius: 6px;
+  margin-bottom: 20px; }
+  .unit-container h3 {
+    color: #6c0245;
+    padding: 0;
+    margin: 0; }
+  .unit-container .user-photo-box {
+    position: absolute;
+    right: 24px;
+    top: 12px; }
+    .unit-container .user-photo-box .user-photo {
+      width: 60px;
+      height: 60px; }
 
 /*# sourceMappingURL=styles.css.map */
