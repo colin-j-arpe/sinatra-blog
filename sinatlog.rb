@@ -10,9 +10,8 @@ enable :sessions
 
 def current_user
 	if session[:user_id]
-		@user = User.find(session[:user_id])
 	else
-		@user = nil
+		@user = User.new
 	end
 end	
 
@@ -36,7 +35,7 @@ post '/login' do
 	else
 		session[:user_id] = @user.id
 	end
-	redirect "/users/#{@user.id}"
+	redirect "/home"
 end
 
 get '/users/:id' do
@@ -47,7 +46,7 @@ get '/users/:id' do
 	erb :user
 end
 
-post '/users/create' do
+post '/user/create' do
 	@user_check = User.where(email: params[:email])
 	if @user_check.length > 0
 		flash[:alert] = "That email has already been registered."
@@ -65,7 +64,7 @@ post '/users/create' do
 	redirect "/users/#{@user.id}"
 end
 
-post '/users/edit' do
+post '/user/edit' do
 	@user = User.find(session[:user_id])
 	if params[:display_name] != ""
 		@user.display_name = params[:display_name]
@@ -84,7 +83,7 @@ post '/users/edit' do
 	redirect "users/#{@user.id}"
 end
 
-post '/users/password' do
+post '/user/password' do
 	flash[:alert] = nil
 	@user = User.find(session[:user_id])
 	if @user.password != params[:old_password]
@@ -118,6 +117,19 @@ post '/post/create' do
 	else
 		@post.embed = params[:embed]
 	end
+	@post.save
+	redirect "/posts/#{@post.id}"
+end
+
+post 'post/edit' do
+	@post = Post.find(params[:post_id])
+	if params[:title] != ""
+		@post.title = params[:title]
+	end
+	if params[:embed] != ""
+		@post.embed = params[:embed]
+	end
+	@post.content = params.content
 	@post.save
 	redirect "/posts/#{@post.id}"
 end

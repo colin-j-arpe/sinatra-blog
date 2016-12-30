@@ -16,5 +16,11 @@ $(document).ready(function () {
 			$("#login-name-input").removeAttr("disabled");
 		}
 	});
+
+	for (let i = 0; i < $(".modal").length; i++) {
+		$(".modal").eq(i).on ("shown.bs.modal", function () {
+			$("#first-field").focus ();
+		});
+	}
 });
 

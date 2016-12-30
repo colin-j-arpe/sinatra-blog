@@ -5,24 +5,60 @@
   .post-contents .post-media {
     max-width: 600px; }
 
-.profile-photo {
+.profile-photo-user {
   width: 200px;
   height: 200px;
   float: right; }
 
+.post-user-info {
+  float: right; }
+  .post-user-info .profile-photo-post {
+    width: 100px;
+    height: 100px; }
+
 body {
   background-color: #ffcc99; }
 
+h2, h3, h4, h5, h6 {
+  color: #6c0245; }
+
+a {
+  color: #6c0245; }
+
+a:hover {
+  color: #e40492;
+  text-decoration: none; }
+
 .page-heading {
   position: fixed;
+  left: 0;
+  right: 0;
+  /*padding-left: 36px;*/
+  background-color: #ddffaa;
+  z-index: 1;
   width: 100%; }
   .page-heading .site-title {
-    font-size: 36px;
-    color: #e40492; }
+    font-size: 48px;
+    font-weight: bold;
+    padding-left: 36px;
+    color: #336600; }
+  .page-heading .site-title:hover {
+    color: #66cc00; }
+  .page-heading .search-bar {
+    padding-top: 30px; }
+  .page-heading .user-menu {
+    padding-top: 24px; }
+  .page-heading .login-buttons {
+    padding-top: 24px; }
 
 #yield-container {
   position: relative;
   top: 60px; }
+  #yield-container .flash-message {
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6c0245; }
 
 .unit-container {
   background-color: #f5b5dd;

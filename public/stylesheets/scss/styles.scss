@@ -1,23 +1,63 @@
 @import 'globals';
 @import 'home';
 @import 'user';
+@import 'post';
 
 body	{
 	background-color: $main-lt;
 }
 
+h2, h3, h4, h5, h6	{
+	color: $prim-dk;
+}
+
+a 	{
+	color: $prim-dk;
+}
+
+a:hover	{
+	color: $prim-md;
+	text-decoration: none;
+}
+
 .page-heading	{
 	position: fixed;
+	left: 0;
+	right: 0;
+	/*padding-left: 36px;*/
+	background-color: $sec-lt;
+	z-index: 1;
 	width: 100%;
 	.site-title	{
-		font-size: 36px;
-		color: $prim-md;
+		font-size: 48px;
+		font-weight: bold;
+		padding-left: 36px;
+		color: $sec-dk;
+	}
+	.site-title:hover	{
+		color: $sec-md;
+	}
+	.search-bar	{
+		padding-top: 30px;
+	}
+	.user-menu	{
+		padding-top: 24px;
+	}
+	.login-buttons	{
+		padding-top: 24px;
 	}
 }
 
 #yield-container	{
 	position: relative;
 	top: 60px;
+
+	.flash-message	{
+		margin-top: 24px;
+		font-size: 20px;
+		font-weight: bold;
+		color: $prim-dk;
+	}
 }
 
 .unit-container	{

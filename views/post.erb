@@ -1,32 +1,57 @@
 <h2><%= @post.title %></h2>
 <%= @post.embed %>
+<div class="post-user-info">
+	<a href="/users/<%= @post.user_id %>"><img class="profile-photo-post" src="<%= User.find(@post.user_id).photo_url %>"></a>
+	<p>Posted by: <%= User.find(@post.user_id).display_name %></p>
+</div>
 <p><%= @post.content %></p>
 <% if @post.user_id == @user.id %>
+	<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-post-modal">Edit post</button>
 	<a href="/posts/<%= @post.id %>/delete" class="btn btn-danger" role="button">Delete post</a>
 <% end %>
 
-<% if @comments.length > 0 %>
-	<h3>Comments:</h3>
-<% end %>
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#new-comment-modal">Add comment</button>
+<h3>Comments:</h3>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-comment-modal">Add comment</button>
 
 <% @comments.each do |comment| %>
 	<% if @user.admin || comment.approved %>
 		<h4><%= User.find(comment.user_id).display_name %> says:</h4>
 		<p><%= comment.content %></p>
 		<% if comment.user_id == @user.id %>
-			<button type="button" class="btn btn-info btn-sm" href="/comments/<%= comment.id %>/delete">Delete comment</button>
+			<button type="button" class="btn btn-danger" href="/comments/<%= comment.id %>/delete">Delete comment</button>
 		<% end %>
 		<% if @user.admin %>
 			<% if comment.approved %>
-				<button type="button" class="btn btn-info btn-sm">Disapprove comment</button>
+				<button type="button" class="btn btn-warning btn-sm">Disapprove comment</button>
 			<% else %>
-				<button type="button" class="btn btn-info btn-sm">Approve comment</button>
+				<button type="button" class="btn btn-success btn-sm">Approve comment</button>
 			<% end %>
 		<% end %>
 	<% end %>
 <% end %>
 
+<div id="edit-post-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit post</h4>
+				<p>Note: fields left blank will remain unchanged</p>
+			</div>
+			<div class="modal-body">
+				<form method="POST" action="/post/edit">
+					<input type="hidden" name="post_id" value="<%= @post.id %>">
+					<label for="title">Title</label>
+					<input id="first-field" type="text" name="title">
+					<label>Embedded media link</label>
+					<input type="text" name="embed">
+					<textarea name="content" cols="60"><%= @post.content %></textarea><br>
+					<button type="submit">Update post</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 <div id="new-comment-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -36,7 +61,7 @@
 			<div class="modal-body">
 				<form method="POST" action="/comment/create">
 					<label for="content">Your comment:</label>
-					<input type="text" name="content">
+					<input id="first-field" type="text" name="content">
 					<input type="hidden" name="user_id" value="<%= @user.id %>">
 					<input type="hidden" name="post_id" value="<%= @post.id %>">
 					<button>Hear me roar!</button>
