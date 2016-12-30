@@ -10,6 +10,7 @@ enable :sessions
 
 def current_user
 	if session[:user_id]
+		@user = User.find(session[:user_id])
 	else
 		@user = User.new
 	end
@@ -137,12 +138,44 @@ end
 get '/posts/:id/delete' do
 	@post = Post.find(params[:id])
 	@post.destroy
-	redirect "users/#{session[:user_id]}"
+	redirect "/home"
 end
 
 post '/comment/create' do
 	@comment = Comment.create(params)
 	redirect "/posts/#{params[:post_id]}"
+end
+
+get '/comments/:id/approve' do
+	@comment = Comment.find(params[:id])
+	@comment.approved = true
+	@comment.save
+	redirect "/posts/#{@comment.post_id}"
+end
+
+get '/comments/:id/disapprove' do
+puts "method called"
+	@comment = Comment.find(params[:id])
+print "comment to be removed is "
+puts @comment.content
+	@comment.approved = false
+	@comment.save
+print "approval is now"
+puts @comment.approved
+	redirect "/posts/#{@comment.post_id}"
+end
+
+get '/comments/:id/delete' do
+puts "correct route"
+	@comment = Comment.find(params[:id])
+print "selected comment: "
+puts @comment.content
+	@post = @comment.post_id
+print "from post number "
+puts @post
+	@comment.destroy
+puts "comment removed"
+	redirect "/posts/#{@post}"
 end
 
 post '/search' do

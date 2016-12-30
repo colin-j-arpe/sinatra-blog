@@ -18,13 +18,13 @@
 		<h4><%= User.find(comment.user_id).display_name %> says:</h4>
 		<p><%= comment.content %></p>
 		<% if comment.user_id == @user.id %>
-			<button type="button" class="btn btn-danger" href="/comments/<%= comment.id %>/delete">Delete comment</button>
+			<a href="/comments/<%= comment.id %>/delete"><button type="button" class="btn btn-danger">Delete comment</button></a>
 		<% end %>
 		<% if @user.admin %>
 			<% if comment.approved %>
-				<button type="button" class="btn btn-warning btn-sm">Disapprove comment</button>
+				<a href="/comments/<%= comment.id %>/disapprove"><button type="submit" class="btn btn-warning" href="comments/<%= comment.id %>/disapprove">Disapprove comment</button></a>
 			<% else %>
-				<button type="button" class="btn btn-success btn-sm">Approve comment</button>
+				<a href="/comments/<%= comment.id %>/approve"><button type="submit" class="btn btn-success" href="comments/<%= comment.id %>/approve">Approve comment</button></a>
 			<% end %>
 		<% end %>
 	<% end %>
@@ -42,7 +42,7 @@
 				<form method="POST" action="/post/edit">
 					<input type="hidden" name="post_id" value="<%= @post.id %>">
 					<label for="title">Title</label>
-					<input id="first-field" type="text" name="title">
+					<input class="first-field" type="text" name="title">
 					<label>Embedded media link</label>
 					<input type="text" name="embed">
 					<textarea name="content" cols="60"><%= @post.content %></textarea><br>
@@ -61,7 +61,7 @@
 			<div class="modal-body">
 				<form method="POST" action="/comment/create">
 					<label for="content">Your comment:</label>
-					<input id="first-field" type="text" name="content">
+					<input class="first-field" type="text" name="content">
 					<input type="hidden" name="user_id" value="<%= @user.id %>">
 					<input type="hidden" name="post_id" value="<%= @post.id %>">
 					<button>Hear me roar!</button>
