@@ -10,6 +10,9 @@
   height: 200px;
   float: right; }
 
+.embed-container {
+  margin-bottom: 12px; }
+
 .post-user-info {
   float: right; }
   .post-user-info .profile-photo-post {
@@ -61,6 +64,7 @@ a:hover {
     color: #6c0245; }
 
 .unit-container {
+  width: 100%;
   background-color: #f5b5dd;
   padding: 10px 20px;
   border: 2px solid #336600;

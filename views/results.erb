@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
 				<div class="unit-container">
-					<a href="posts/<%= post.id %>">
+					<a href="/posts/<%= post.id %>">
 						<div class="post-result">
 							<h3><%= post.title %></h3>
 							<p>Posted by <%= User.find(post.user_id).display_name %></p>
@@ -31,7 +31,7 @@
 						</div>
 					</a>
 				</div>
-			<% end %>
-		<% end %>
-	</div>
-</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

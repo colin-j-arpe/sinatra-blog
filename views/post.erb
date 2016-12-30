@@ -1,8 +1,10 @@
 <h2><%= @post.title %></h2>
-<%= @post.embed %>
 <div class="post-user-info">
 	<a href="/users/<%= @post.user_id %>"><img class="profile-photo-post" src="<%= User.find(@post.user_id).photo_url %>"></a>
 	<p>Posted by: <%= User.find(@post.user_id).display_name %></p>
+</div>
+<div class="embed-container">
+	<%= @post.embed %>
 </div>
 <p><%= @post.content %></p>
 <% if @post.user_id == @user.id %>
